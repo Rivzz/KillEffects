@@ -5,5 +5,5 @@ import org.bukkit.Location;
 
 public interface EffectExecution {
 
-    public void display(Location location, Color color);
+    void display(Location location, Color color);
 }

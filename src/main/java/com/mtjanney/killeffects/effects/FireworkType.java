@@ -14,10 +14,12 @@ public class FireworkType implements EffectExecution {
         Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
         FireworkMeta meta = firework.getFireworkMeta();
 
+        meta.setDisplayName("delete");
         meta.setPower(2);
-        meta.addEffect(FireworkEffect.builder().withColor(color).flicker(true).build());
+        meta.addEffect(FireworkEffect.builder().withColor(color).flicker(false).build());
 
         firework.setFireworkMeta(meta);
+        firework.setOp(true);
         firework.detonate();
     }
 }

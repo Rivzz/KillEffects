@@ -42,16 +42,6 @@ public class SQLite {
 
                 plugin.getLogger().log(Level.INFO, "Database tables now exist.");
                 connected = true;
-
-                Statement statement2 = connection.createStatement();
-                ResultSet resultSet = statement2.executeQuery("SELECT * FROM players;");
-
-                while(resultSet.next()) {
-                    plugin.getLogger().log(Level.INFO, resultSet.toString());
-                    plugin.getLogger().log(Level.INFO, "yep");
-                }
-
-                statement2.close();
             } catch(SQLException exception) {
                 exception.printStackTrace();
             }
@@ -84,7 +74,7 @@ public class SQLite {
                 ResultSet resultSet = statement.executeQuery(getPlayerEffectStatement(uuid));
 
                 while (resultSet.next()) {
-                   effectID = resultSet.getInt(2);
+                   effectID = resultSet.getInt(1);
                 }
 
             } catch (SQLException exception) {
