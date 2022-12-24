@@ -1,0 +1,7 @@
+name: KillEffects
+version: '${project.version}'
+main: com.mtjanney.killeffects.KillEffects
+api-version: 1.19
+prefix: KillEffects
+authors: [ mtjanney ]
+description: Custom effects upon killing an entity or player.
