@@ -5,3 +5,7 @@ api-version: 1.19
 prefix: KillEffects
 authors: [ mtjanney ]
 description: Custom effects upon killing an entity or player.
+commands:
+  killeffects:
+    description: Main kill effect command
+    aliases: [ke]

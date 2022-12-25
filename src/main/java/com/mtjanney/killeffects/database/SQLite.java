@@ -64,6 +64,22 @@ public class SQLite {
         }
     }
 
+    public void changePlayerEffect(UUID uuid, int effectID) {
+        if (connected) {
+            try {
+                assert connection != null;
+                Statement statement = connection.createStatement();
+
+                statement.executeUpdate(changePlayerEffectStatement(uuid, effectID));
+                statement.close();
+
+                plugin.getLogger().log(Level.INFO, "Updated " + uuid + " with effectID=" + effectID + ".");
+            } catch(SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
     public int getPlayerEffect(UUID uuid) {
         int effectID = 0;
 
@@ -139,5 +155,9 @@ public class SQLite {
 
     private String getPlayerEffectStatement(UUID uuid) {
         return "SELECT effect FROM players WHERE uuid='" + uuid.toString() + "';";
+    }
+
+    private String changePlayerEffectStatement(UUID uuid, int effectID) {
+        return "UPDATE players SET effect=" + effectID + " WHERE uuid='" + uuid.toString() + "';" ;
     }
 }
