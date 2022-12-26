@@ -1,23 +1,107 @@
 package com.mtjanney.killeffects.effects;
 
-import com.destroystokyo.paper.ParticleBuilder;
 import com.mtjanney.killeffects.effects.utilities.EffectType;
 import com.mtjanney.killeffects.effects.utilities.Execution;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 
 public class ParticleType extends Execution {
+
     @Override
     public void display(Location location, EffectType effectType) {
         location = location.add(0, 1, 0);
 
         switch (effectType) {
             case BUBBLE_POP: {
-                new ParticleBuilder(Particle.BUBBLE_POP)
-                        .count(10)
-                        .location(location)
-                        .receivers(10)
-                        .spawn();
+                generate(location, Particle.BUBBLE_POP, true);
+                break;
+            }
+            case CAMPFIRE: {
+                generate(location, Particle.CAMPFIRE_SIGNAL_SMOKE, true);
+                break;
+            }
+            case CLOUD: {
+                generate(location, Particle.CLOUD, true);
+                break;
+            }
+            case CRIT: {
+                generate(location, Particle.CRIT, true);
+                break;
+            }
+            case CRIT_MAGIC: {
+                generate(location, Particle.CRIT_MAGIC, true);
+                break;
+            }
+            case DRAGON_BREATH: {
+                generate(location, Particle.DRAGON_BREATH, true);
+                break;
+            }
+            case DRIP_LAVA: {
+                generate(location, Particle.DRIP_LAVA, false);
+                break;
+            }
+            case DRIP_WATER: {
+                generate(location, Particle.DRIP_WATER, false);
+                break;
+            }
+            case ELECTRIC_SPARK: {
+                generate(location, Particle.ELECTRIC_SPARK, true);
+                break;
+            }
+            case ENCHANTMENT_TABLE: {
+                generate(location, Particle.ENCHANTMENT_TABLE, true);
+                break;
+            }
+            case END_ROD: {
+                generate(location, Particle.END_ROD, true);
+                break;
+            }
+            case EXPLOSION_LARGE: {
+                generate(location, Particle.EXPLOSION_LARGE, true);
+                break;
+            }
+            case FALLING_HONEY: {
+                generate(location, Particle.FALLING_HONEY, false);
+                break;
+            }
+            case FIREWORKS_SPARK: {
+                generate(location, Particle.FIREWORKS_SPARK, true);
+                break;
+            }
+            case FLAME: {
+                generate(location, Particle.FLAME, true);
+                break;
+            }
+            case HEART: {
+                generate(location, Particle.HEART, false);
+                break;
+            }
+            case NOTE: {
+                generate(location, Particle.NOTE, false);
+                break;
+            }
+            case PORTAL: {
+                generate(location, Particle.PORTAL, true);
+                break;
+            }
+            case SNOWFLAKE: {
+                generate(location, Particle.SNOWFLAKE, false);
+                break;
+            }
+            case SOUL_FIRE_FLAME: {
+                generate(location, Particle.SOUL_FIRE_FLAME, true);
+                break;
+            }
+            case TOTEM: {
+                generate(location, Particle.TOTEM, true);
+                break;
+            }
+            case VILLAGER_ANGRY: {
+                generate(location, Particle.VILLAGER_ANGRY, false);
+                break;
+            }
+            case VILLAGER_HAPPY: {
+                generate(location, Particle.VILLAGER_HAPPY, false);
                 break;
             }
         }

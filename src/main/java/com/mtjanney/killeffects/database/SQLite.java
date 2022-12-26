@@ -26,8 +26,6 @@ public class SQLite {
             database.getParentFile().mkdirs();
             plugin.saveResource(databaseName + ".db", false);
             plugin.getLogger().log(Level.INFO, "Created " + databaseName + ".db");
-        } else {
-            plugin.getLogger().log(Level.INFO, databaseName + ".db exists, so nothing to do.");
         }
 
         if (database.exists()) {
@@ -40,7 +38,6 @@ public class SQLite {
                 statement.executeUpdate(createPlayerTable);
                 statement.close();
 
-                plugin.getLogger().log(Level.INFO, "Database tables now exist.");
                 connected = true;
             } catch(SQLException exception) {
                 exception.printStackTrace();
@@ -56,8 +53,6 @@ public class SQLite {
 
                 statement.executeUpdate(addPlayerStatement(uuid));
                 statement.close();
-
-                plugin.getLogger().log(Level.INFO, "Added a new player to the players table.");
             } catch(SQLException exception) {
                 exception.printStackTrace();
             }
@@ -72,8 +67,6 @@ public class SQLite {
 
                 statement.executeUpdate(changePlayerEffectStatement(uuid, effectID));
                 statement.close();
-
-                plugin.getLogger().log(Level.INFO, "Updated " + uuid + " with effectID=" + effectID + ".");
             } catch(SQLException exception) {
                 exception.printStackTrace();
             }
@@ -120,9 +113,6 @@ public class SQLite {
                 exception.printStackTrace();
             }
         }
-
-        if (found) plugin.getLogger().log(Level.INFO, "Player table with player has been found.");
-        else plugin.getLogger().log(Level.SEVERE, "Player table with player has not been found.");
 
         return found;
     }

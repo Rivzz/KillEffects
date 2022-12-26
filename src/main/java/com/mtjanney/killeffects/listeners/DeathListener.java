@@ -4,7 +4,7 @@ import com.mtjanney.killeffects.KillEffects;
 import com.mtjanney.killeffects.database.SQLite;
 import com.mtjanney.killeffects.effects.FireworkType;
 import com.mtjanney.killeffects.effects.ParticleType;
-import com.mtjanney.killeffects.effects.utilities.EffectType;
+import com.mtjanney.killeffects.effects.utilities.Execution;
 import org.bukkit.Color;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 
 import java.util.UUID;
 
-public class DeathListener implements Listener {
+public class DeathListener extends Execution implements Listener {
 
     @EventHandler
     public void onJoin(AsyncPlayerPreLoginEvent event) {
@@ -38,8 +38,8 @@ public class DeathListener implements Listener {
 
             if (effectID == 0) {
                 new FireworkType().display(playerKilled.getLocation().add(0, 1, 0), Color.RED);
-            } else if (effectID == 1) {
-                new ParticleType().display(playerKilled.getLocation(), EffectType.BUBBLE_POP);
+            } else {
+                new ParticleType().display(playerKilled.getLocation(), convert(effectID));
             }
         }
     }
