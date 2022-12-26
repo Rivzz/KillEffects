@@ -1,8 +1,10 @@
 package com.mtjanney.killeffects.effects.utilities;
 
+import com.mtjanney.killeffects.KillEffects;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,27 +16,47 @@ public abstract class Execution implements EffectExecution {
     public void display(Location location, Color color) {}
 
     @Override
-    public void generate(Location location, Particle particle, boolean directional) {
-        if (directional) {
-            for (int i = 0; i < 25; i++) {
-                double x = ThreadLocalRandom.current().nextDouble(-1, 1);
-                double y = ThreadLocalRandom.current().nextDouble(-1, 1);
-                double z = ThreadLocalRandom.current().nextDouble(-1, 1);
+    public void generate(Location location, Particle particle, boolean repeat) {
+        if (repeat) {
+            new BukkitRunnable() {
 
-                Location clone = location.clone().add(x, y, z);
+                int cycles = 0;
 
-                location.getWorld().spawnParticle(particle, clone, 0, 0, 0, 0);
-            }
+                @Override
+                public void run() {
+                    for (int i = 0; i < 25; i++) {
+                        double x = ThreadLocalRandom.current().nextDouble(-1, 1);
+                        double y = ThreadLocalRandom.current().nextDouble(-1, 1);
+                        double z = ThreadLocalRandom.current().nextDouble(-1, 1);
+
+                        Location clone = location.clone().add(x, y, z);
+
+                        location.getWorld().spawnParticle(particle, clone, 0, 0, 0, 0);
+                    }
+
+                    if (cycles == 2) {
+                        cancel();
+                    }
+
+                    cycles++;
+                }
+            }.runTaskTimerAsynchronously(KillEffects.getInstance(), 0L, 5L);
         } else {
-            for (int i = 0; i < 25; i++) {
-                double x = ThreadLocalRandom.current().nextDouble(-1, 1);
-                double y = ThreadLocalRandom.current().nextDouble(-1, 1);
-                double z = ThreadLocalRandom.current().nextDouble(-1, 1);
+            new BukkitRunnable() {
 
-                Location clone = location.clone().add(x, y, z);
+                @Override
+                public void run() {
+                    for (int i = 0; i < 25; i++) {
+                        double x = ThreadLocalRandom.current().nextDouble(-1, 1);
+                        double y = ThreadLocalRandom.current().nextDouble(-1, 1);
+                        double z = ThreadLocalRandom.current().nextDouble(-1, 1);
 
-                location.getWorld().spawnParticle(particle, clone, 0, 0, 0, 0);
-            }
+                        Location clone = location.clone().add(x, y, z);
+
+                        location.getWorld().spawnParticle(particle, clone, 0, 0, 0, 0);
+                    }
+                }
+            }.runTaskAsynchronously(KillEffects.getInstance());
         }
     }
 

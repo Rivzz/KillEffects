@@ -17,11 +17,11 @@ public class ParticleType extends Execution {
                 break;
             }
             case CAMPFIRE: {
-                generate(location, Particle.CAMPFIRE_SIGNAL_SMOKE, true);
+                generate(location, Particle.CAMPFIRE_SIGNAL_SMOKE, false);
                 break;
             }
             case CLOUD: {
-                generate(location, Particle.CLOUD, true);
+                generate(location, Particle.CLOUD, false);
                 break;
             }
             case CRIT: {
@@ -33,7 +33,7 @@ public class ParticleType extends Execution {
                 break;
             }
             case DRAGON_BREATH: {
-                generate(location, Particle.DRAGON_BREATH, true);
+                generate(location, Particle.DRAGON_BREATH, false);
                 break;
             }
             case DRIP_LAVA: {
@@ -53,11 +53,11 @@ public class ParticleType extends Execution {
                 break;
             }
             case END_ROD: {
-                generate(location, Particle.END_ROD, true);
+                generate(location, Particle.END_ROD, false);
                 break;
             }
             case EXPLOSION_LARGE: {
-                generate(location, Particle.EXPLOSION_LARGE, true);
+                generate(location, Particle.EXPLOSION_LARGE, false);
                 break;
             }
             case FALLING_HONEY: {
@@ -73,11 +73,11 @@ public class ParticleType extends Execution {
                 break;
             }
             case HEART: {
-                generate(location, Particle.HEART, false);
+                generate(location, Particle.HEART, true);
                 break;
             }
             case NOTE: {
-                generate(location, Particle.NOTE, false);
+                generate(location, Particle.NOTE, true);
                 break;
             }
             case PORTAL: {
@@ -85,7 +85,7 @@ public class ParticleType extends Execution {
                 break;
             }
             case SNOWFLAKE: {
-                generate(location, Particle.SNOWFLAKE, false);
+                generate(location, Particle.SNOWFLAKE, true);
                 break;
             }
             case SOUL_FIRE_FLAME: {
@@ -93,11 +93,11 @@ public class ParticleType extends Execution {
                 break;
             }
             case TOTEM: {
-                generate(location, Particle.TOTEM, true);
+                generate(location, Particle.TOTEM, false);
                 break;
             }
             case VILLAGER_ANGRY: {
-                generate(location, Particle.VILLAGER_ANGRY, false);
+                generate(location, Particle.VILLAGER_ANGRY, true);
                 break;
             }
             case VILLAGER_HAPPY: {

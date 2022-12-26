@@ -7,6 +7,6 @@ import org.bukkit.Particle;
 public interface EffectExecution {
     void display(Location location, EffectType effectType);
     void display(Location location, Color color);
-    void generate(Location location, Particle particle, boolean directional);
+    void generate(Location location, Particle particle, boolean repeat);
     EffectType convert(int effectID);
 }
