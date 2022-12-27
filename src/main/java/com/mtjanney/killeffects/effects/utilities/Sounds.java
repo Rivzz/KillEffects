@@ -1,0 +1,15 @@
+package com.mtjanney.killeffects.effects.utilities;
+
+public enum Sounds {
+    NULL,
+    BLOCK_ANVIL_LAND,
+    BLOCK_BELL_USE,
+    BLOCK_CHAIN_BREAK,
+    BLOCK_CHEST_OPEN,
+    BLOCK_CONDUIT_DEACTIVATE,
+    BLOCK_ENCHANTMENT_TABLE_USE,
+    BLOCK_END_PORTAL_SPAWN,
+    BLOCK_GLASS_BREAK,
+    BLOCK_LAVA_EXTINGUISH,
+    BLOCK_SCULK_CATALYST_BREAK
+}

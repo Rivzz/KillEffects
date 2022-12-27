@@ -1,6 +1,6 @@
 package com.mtjanney.killeffects.effects;
 
-import com.mtjanney.killeffects.effects.utilities.EffectType;
+import com.mtjanney.killeffects.effects.utilities.Effects;
 import com.mtjanney.killeffects.effects.utilities.Execution;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -8,7 +8,7 @@ import org.bukkit.Particle;
 public class ParticleType extends Execution {
 
     @Override
-    public void display(Location location, EffectType effectType) {
+    public void display(Location location, Effects effectType) {
         location = location.add(0, 1, 0);
 
         switch (effectType) {
@@ -64,12 +64,20 @@ public class ParticleType extends Execution {
                 generate(location, Particle.FALLING_HONEY, false);
                 break;
             }
+            case FALLING_OBSIDIAN_TEAR: {
+                generate(location, Particle.FALLING_OBSIDIAN_TEAR, false);
+                break;
+            }
             case FIREWORKS_SPARK: {
                 generate(location, Particle.FIREWORKS_SPARK, true);
                 break;
             }
             case FLAME: {
                 generate(location, Particle.FLAME, true);
+                break;
+            }
+            case GLOW_SQUID_INK: {
+                generate(location, Particle.GLOW_SQUID_INK, false);
                 break;
             }
             case HEART: {
@@ -103,6 +111,9 @@ public class ParticleType extends Execution {
             case VILLAGER_HAPPY: {
                 generate(location, Particle.VILLAGER_HAPPY, false);
                 break;
+            }
+            default: {
+                // Nothing (no effect active)
             }
         }
     }

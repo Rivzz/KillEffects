@@ -25,7 +25,11 @@ public class SQLite {
         if (!database.exists()) {
             database.getParentFile().mkdirs();
             plugin.saveResource(databaseName + ".db", false);
-            plugin.getLogger().log(Level.INFO, "Created " + databaseName + ".db");
+            plugin.getLogger().log(Level.INFO, "=         |");
+            plugin.getLogger().log(Level.INFO, "===       |");
+            plugin.getLogger().log(Level.INFO, "======    |");
+            plugin.getLogger().log(Level.INFO, "==========|");
+            plugin.getLogger().log(Level.INFO, "Successfully Created " + databaseName + ".db");
         }
 
         if (database.exists()) {
@@ -94,6 +98,41 @@ public class SQLite {
         return effectID;
     }
 
+    public void changePlayerSound(UUID uuid, int soundID) {
+        if (connected) {
+            try {
+                assert connection != null;
+                Statement statement = connection.createStatement();
+
+                statement.executeUpdate(changePlayerSoundStatement(uuid, soundID));
+                statement.close();
+            } catch(SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
+    public int getPlayerSound(UUID uuid) {
+        int soundID = 0;
+
+        if (connected) {
+            try {
+                assert connection != null;
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(getPlayerSoundStatement(uuid));
+
+                while (resultSet.next()) {
+                    soundID = resultSet.getInt(1);
+                }
+
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+
+        return soundID;
+    }
+
     public boolean playerExists(UUID uuid) {
         boolean found = false;
 
@@ -133,10 +172,11 @@ public class SQLite {
     private String createPlayerTable = "CREATE TABLE IF NOT EXISTS players (" +
             "`uuid` TEXT NOT NULL," +
             "`effect` INT(4) NOT NULL," +
+            "`sound` INT(4) NOT NULL," +
             "PRIMARY KEY (`uuid`));";
 
     private String addPlayerStatement(UUID uuid) {
-        return "INSERT INTO players VALUES('" + uuid.toString() + "', 0000);";
+        return "INSERT INTO players VALUES('" + uuid.toString() + "', -1, -1);";
     }
 
     private String playerExistsStatement(UUID uuid) {
@@ -147,7 +187,15 @@ public class SQLite {
         return "SELECT effect FROM players WHERE uuid='" + uuid.toString() + "';";
     }
 
+    private String getPlayerSoundStatement(UUID uuid) {
+        return "SELECT sound FROM players WHERE uuid='" + uuid.toString() + "';";
+    }
+
     private String changePlayerEffectStatement(UUID uuid, int effectID) {
         return "UPDATE players SET effect=" + effectID + " WHERE uuid='" + uuid.toString() + "';" ;
+    }
+
+    private String changePlayerSoundStatement(UUID uuid, int soundID) {
+        return "UPDATE players SET sound=" + soundID + " WHERE uuid='" + uuid.toString() + "';" ;
     }
 }

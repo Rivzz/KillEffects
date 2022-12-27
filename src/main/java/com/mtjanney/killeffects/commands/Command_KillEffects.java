@@ -3,7 +3,7 @@ package com.mtjanney.killeffects.commands;
 import com.mtjanney.killeffects.KillEffects;
 import com.mtjanney.killeffects.effects.FireworkType;
 import com.mtjanney.killeffects.effects.ParticleType;
-import com.mtjanney.killeffects.effects.utilities.EffectType;
+import com.mtjanney.killeffects.effects.SoundType;
 import com.mtjanney.killeffects.effects.utilities.Execution;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class Command_KillEffects extends Execution implements CommandExecutor {
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!command.getName().equalsIgnoreCase("killeffects") || !(sender instanceof Player)) {
@@ -36,11 +37,19 @@ public class Command_KillEffects extends Execution implements CommandExecutor {
                 if (effectID == 0) {
                     new FireworkType().display(player.getLocation().add(0, 1, 0), Color.RED);
                 } else {
-                    new ParticleType().display(player.getLocation(), convert(effectID));
+                    new ParticleType().display(player.getLocation(), convertEffect(effectID));
                 }
+            } else if (args[0].equalsIgnoreCase("sound")) {
+                if (!KillEffects.getSqLite().playerExists(player.getUniqueId())) {
+                    return false;
+                }
+
+                int soundID = KillEffects.getSqLite().getPlayerSound(player.getUniqueId());
+
+                new SoundType().display(player.getLocation(), convertSound(soundID));
             }
         } else if (args.length == 2) {
-            if (args[0].equalsIgnoreCase("set")) {
+            if (args[0].equalsIgnoreCase("seteffect")) {
                 int num = Integer.parseInt(args[1]);
 
                 if (!KillEffects.getSqLite().playerExists(player.getUniqueId())) {
@@ -49,6 +58,15 @@ public class Command_KillEffects extends Execution implements CommandExecutor {
 
                 KillEffects.getSqLite().changePlayerEffect(player.getUniqueId(), num);
                 System.out.println("Changed " + player.getUniqueId() + "'s effectID=" + num);
+            } else if (args[0].equalsIgnoreCase("setsound")) {
+                int num = Integer.parseInt(args[1]);
+
+                if (!KillEffects.getSqLite().playerExists(player.getUniqueId())) {
+                    return false;
+                }
+
+                KillEffects.getSqLite().changePlayerSound(player.getUniqueId(), num);
+                System.out.println("Changed " + player.getUniqueId() + "'s soundID=" + num);
             }
         } else {
             // TODO: Display a help message

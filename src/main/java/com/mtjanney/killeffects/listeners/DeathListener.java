@@ -4,6 +4,7 @@ import com.mtjanney.killeffects.KillEffects;
 import com.mtjanney.killeffects.database.SQLite;
 import com.mtjanney.killeffects.effects.FireworkType;
 import com.mtjanney.killeffects.effects.ParticleType;
+import com.mtjanney.killeffects.effects.SoundType;
 import com.mtjanney.killeffects.effects.utilities.Execution;
 import org.bukkit.Color;
 import org.bukkit.entity.EntityType;
@@ -39,12 +40,15 @@ public class DeathListener extends Execution implements Listener {
 
             if (KillEffects.getSqLite().playerExists(killer.getUniqueId())) {
                 int effectID = KillEffects.getSqLite().getPlayerEffect(killer.getUniqueId());
+                int soundID = KillEffects.getSqLite().getPlayerSound(killer.getUniqueId());
 
                 if (effectID == 0) {
-                    new FireworkType().display(playerKilled.getLocation().add(0, 1, 0), Color.RED);
+                    new FireworkType().display(event.getEntity().getLocation().add(0, 1, 0), Color.RED);
                 } else {
-                    new ParticleType().display(playerKilled.getLocation(), convert(effectID));
+                    new ParticleType().display(event.getEntity().getLocation(), convertEffect(effectID));
                 }
+
+                new SoundType().display(event.getEntity().getLocation(), convertSound(soundID));
             }
         }
     }
@@ -96,12 +100,15 @@ public class DeathListener extends Execution implements Listener {
 
             if (KillEffects.getSqLite().playerExists(killer.getUniqueId())) {
                 int effectID = KillEffects.getSqLite().getPlayerEffect(killer.getUniqueId());
+                int soundID = KillEffects.getSqLite().getPlayerSound(killer.getUniqueId());
 
                 if (effectID == 0) {
                     new FireworkType().display(event.getEntity().getLocation().add(0, 1, 0), Color.RED);
                 } else {
-                    new ParticleType().display(event.getEntity().getLocation(), convert(effectID));
+                    new ParticleType().display(event.getEntity().getLocation(), convertEffect(effectID));
                 }
+
+                new SoundType().display(event.getEntity().getLocation(), convertSound(soundID));
             }
         }
     }

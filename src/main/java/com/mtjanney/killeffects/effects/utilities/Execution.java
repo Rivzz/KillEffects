@@ -4,13 +4,17 @@ import com.mtjanney.killeffects.KillEffects;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Execution implements EffectExecution {
     @Override
-    public void display(Location location, EffectType effectType) {}
+    public void display(Location location, Effects effectType) {}
+
+    @Override
+    public void display(Location location, Sounds soundType) {}
 
     @Override
     public void display(Location location, Color color) {}
@@ -61,79 +65,136 @@ public abstract class Execution implements EffectExecution {
     }
 
     @Override
-    public EffectType convert(int effectID) {
-        switch (effectID) {
+    public void generate(Location location, Sound sound) {
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                System.out.println("This sound is " + sound);
+                location.getWorld().playSound(location, sound, 2F, 1F);
+            }
+        }.runTaskAsynchronously(KillEffects.getInstance());
+    }
+
+    @Override
+    public Sounds convertSound(int soundID) {
+        switch (soundID) {
             case 1: {
-                return EffectType.BUBBLE_POP;
+                return Sounds.BLOCK_ANVIL_LAND;
             }
             case 2: {
-                return EffectType.CAMPFIRE;
+                return Sounds.BLOCK_BELL_USE;
             }
             case 3: {
-                return EffectType.CLOUD;
+                return Sounds.BLOCK_CHAIN_BREAK;
             }
             case 4: {
-                return EffectType.CRIT;
+                return Sounds.BLOCK_CHEST_OPEN;
             }
             case 5: {
-                return EffectType.CRIT_MAGIC;
+                return Sounds.BLOCK_CONDUIT_DEACTIVATE;
             }
             case 6: {
-                return EffectType.DRAGON_BREATH;
+                return Sounds.BLOCK_ENCHANTMENT_TABLE_USE;
             }
             case 7: {
-                return EffectType.DRIP_LAVA;
+                return Sounds.BLOCK_END_PORTAL_SPAWN;
             }
             case 8: {
-                return EffectType.DRIP_WATER;
+                return Sounds.BLOCK_GLASS_BREAK;
             }
             case 9: {
-                return EffectType.ELECTRIC_SPARK;
+                return Sounds.BLOCK_LAVA_EXTINGUISH;
             }
             case 10: {
-                return EffectType.ENCHANTMENT_TABLE;
-            }
-            case 11: {
-                return EffectType.END_ROD;
-            }
-            case 12: {
-                return EffectType.EXPLOSION_LARGE;
-            }
-            case 13: {
-                return EffectType.FALLING_HONEY;
-            }
-            case 14: {
-                return EffectType.FIREWORKS_SPARK;
-            }
-            case 15: {
-                return EffectType.FLAME;
-            }
-            case 16: {
-                return EffectType.HEART;
-            }
-            case 17: {
-                return EffectType.NOTE;
-            }
-            case 18: {
-                return EffectType.PORTAL;
-            }
-            case 19: {
-                return EffectType.SNOWFLAKE;
-            }
-            case 20: {
-                return EffectType.SOUL_FIRE_FLAME;
-            }
-            case 21: {
-                return EffectType.TOTEM;
-            }
-            case 22: {
-                return EffectType.VILLAGER_ANGRY;
-            }
-            case 23: {
-                return EffectType.VILLAGER_HAPPY;
+                return Sounds.BLOCK_SCULK_CATALYST_BREAK;
             }
             default: {
-                return EffectType.NULL;
+                return Sounds.NULL;
+            }
+        }
+    }
+
+    @Override
+    public Effects convertEffect(int effectID) {
+        switch (effectID) {
+            case 1: {
+                return Effects.BUBBLE_POP;
+            }
+            case 2: {
+                return Effects.CAMPFIRE;
+            }
+            case 3: {
+                return Effects.CLOUD;
+            }
+            case 4: {
+                return Effects.CRIT;
+            }
+            case 5: {
+                return Effects.CRIT_MAGIC;
+            }
+            case 6: {
+                return Effects.DRAGON_BREATH;
+            }
+            case 7: {
+                return Effects.DRIP_LAVA;
+            }
+            case 8: {
+                return Effects.DRIP_WATER;
+            }
+            case 9: {
+                return Effects.ELECTRIC_SPARK;
+            }
+            case 10: {
+                return Effects.ENCHANTMENT_TABLE;
+            }
+            case 11: {
+                return Effects.END_ROD;
+            }
+            case 12: {
+                return Effects.EXPLOSION_LARGE;
+            }
+            case 13: {
+                return Effects.FALLING_HONEY;
+            }
+            case 14: {
+                return Effects.FALLING_OBSIDIAN_TEAR;
+            }
+            case 15: {
+                return Effects.FIREWORKS_SPARK;
+            }
+            case 16: {
+                return Effects.FLAME;
+            }
+            case 17: {
+                return Effects.GLOW_SQUID_INK;
+            }
+            case 18: {
+                return Effects.HEART;
+            }
+            case 19: {
+                return Effects.NOTE;
+            }
+            case 20: {
+                return Effects.PORTAL;
+            }
+            case 21: {
+                return Effects.SNOWFLAKE;
+            }
+            case 22: {
+                return Effects.SOUL_FIRE_FLAME;
+            }
+            case 23: {
+                return Effects.TOTEM;
+            }
+            case 24: {
+                return Effects.VILLAGER_ANGRY;
+            }
+            case 25: {
+                return Effects.VILLAGER_HAPPY;
+            }
+            default: {
+                return Effects.NULL;
             }
         }
     }

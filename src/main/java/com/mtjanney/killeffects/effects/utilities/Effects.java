@@ -1,6 +1,6 @@
 package com.mtjanney.killeffects.effects.utilities;
 
-public enum EffectType {
+public enum Effects {
     NULL,
     BUBBLE_POP,
     CAMPFIRE,
@@ -15,8 +15,10 @@ public enum EffectType {
     END_ROD,
     EXPLOSION_LARGE,
     FALLING_HONEY,
+    FALLING_OBSIDIAN_TEAR,
     FIREWORKS_SPARK,
     FLAME,
+    GLOW_SQUID_INK,
     HEART,
     NOTE,
     PORTAL,
